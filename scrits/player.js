@@ -38,19 +38,19 @@ app.ticker.add(() => {
 	player.previousX = player.x
 	player.previousY = player.y
 
-	if (keys[37]) {
+	if (keys[65]) {
 		// Left arrow key
 		player.x -= playerSpeed
 	}
-	if (keys[39]) {
+	if (keys[68]) {
 		// Right arrow key
 		player.x += playerSpeed
 	}
-	if (keys[38]) {
+	if (keys[87]) {
 		// Up arrow key
 		player.y -= playerSpeed
 	}
-	if (keys[40]) {
+	if (keys[83]) {
 		// Down arrow key
 		player.y += playerSpeed
 	}
