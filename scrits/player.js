@@ -7,8 +7,6 @@ player.x = 160
 player.y = 160
 stage.addChild(player)
 
-const playerSpeed = 5
-
 const keys = {}
 
 // Listen for keydown events to set keys[keyCode] to true.
@@ -21,37 +19,53 @@ window.addEventListener('keyup', event => {
 	keys[event.keyCode] = false
 })
 
-const isColliding = (player, stoneBlock) => {
-	return player.getBounds().intersects(stoneBlock.getBounds())
+const isColliding = (player, boundary) => {
+	return player.getBounds().intersects(boundary.getBounds())
+}
+
+const willCollide = (player, boundariesList, nextX, nextY) => {
+	const tempPlayer = new PIXI.Sprite(player.sprite)
+
+	tempPlayer.x = nextX
+	tempPlayer.y = nextY
+
+	for (const boundary of boundariesList) {
+		if (isColliding(tempPlayer, boundary)) return true
+	}
+	return false
 }
 
 app.ticker.add(() => {
-	// Check for collisions with stone blocks
-	for (const boundary of boundariesList) {
-		if (isColliding(player, boundary)) {
-			// Prevent the player from moving
-			player.x = player.previousX // Restore the previous player position
-			player.y = player.previousY
-		}
-	}
-	// Store the previous player position for collision handling
-	player.previousX = player.x
-	player.previousY = player.y
-
 	if (keys[65]) {
+		const nextX = player.x - PLAYER_SPEED
+		const nextY = player.y
+
 		// Left arrow key
-		player.x -= playerSpeed
+		if (!willCollide(player, boundariesList, nextX, nextY))
+			player.x -= PLAYER_SPEED
 	}
 	if (keys[68]) {
+		const nextX = player.x + PLAYER_SPEED + TILE_SIZE
+		const nextY = player.y
+
 		// Right arrow key
-		player.x += playerSpeed
+		if (!willCollide(player, boundariesList, nextX, nextY))
+			player.x += PLAYER_SPEED
 	}
 	if (keys[87]) {
+		const nextX = player.x
+		const nextY = player.y - PLAYER_SPEED
+
 		// Up arrow key
-		player.y -= playerSpeed
+		if (!willCollide(player, boundariesList, nextX, nextY))
+			player.y -= PLAYER_SPEED
 	}
 	if (keys[83]) {
+		const nextX = player.x
+		const nextY = player.y + PLAYER_SPEED + TILE_SIZE
+
 		// Down arrow key
-		player.y += playerSpeed
+		if (!willCollide(player, boundariesList, nextX, nextY))
+			player.y += PLAYER_SPEED
 	}
 })

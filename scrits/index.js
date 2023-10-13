@@ -9,6 +9,8 @@ const TILE_SET = {
 
 const BOUNDARIES_TYPE = ['wall', 'void']
 
+const PLAYER_SPEED = 5
+
 let app = new PIXI.Application({ width: 800, height: 800 })
 
 document.body.appendChild(app.view)
