@@ -1,5 +1,5 @@
 class LevelGenerator {
-	constructor(app, spriteTextures, levelData, wallsList) {
+	constructor(app, spriteTextures, levelData, boundariesList) {
 		this.app = app
 		this.spriteTextures = spriteTextures
 		this.levelData = levelData
@@ -10,7 +10,7 @@ class LevelGenerator {
 	generateLevel() {
 		for (let y = 0; y < this.levelData.length; y++) {
 			for (let x = 0; x < this.levelData[y].length; x++) {
-				const spriteType = this.levelData[y][x]
+				const spriteType = TILE_SET_DICT[this.levelData[y][x]]
 				if (this.spriteTextures[spriteType]) {
 					const sprite = new PIXI.Sprite(this.spriteTextures[spriteType])
 					sprite.x = x * TILE_SIZE

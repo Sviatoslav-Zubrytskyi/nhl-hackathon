@@ -1,74 +1,15 @@
 const boundariesList = []
 
 const levelData = [
-	['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall'],
-	[
-		'wall',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'wall',
-	],
-	[
-		'wall',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'wall',
-	],
-	[
-		'wall',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'wall',
-	],
-	[
-		'wall',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'wall',
-	],
-	[
-		'wall',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'wall',
-	],
-	[
-		'wall',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'floor',
-		'wall',
-	],
-	['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall'],
+	[1, 1, 1, 1, 1, 1, 1, 1, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
 const levelGenerator = new LevelGenerator(
@@ -78,6 +19,5 @@ const levelGenerator = new LevelGenerator(
 	boundariesList
 )
 levelGenerator.generateLevel()
-
 // If you want to clear the level later:
 // levelGenerator.clearLevel();
