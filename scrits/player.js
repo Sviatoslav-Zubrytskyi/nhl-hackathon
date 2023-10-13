@@ -2,7 +2,7 @@ const stage = app.stage;
 const gameContainer = new PIXI.Container();
 stage.addChild(gameContainer);
 
-const player = PIXI.Sprite.from('assets/player.png');
+const player = PIXI.Sprite.from('assets/char_walk_left.gif');
 player.x = app.screen.width/2;
 player.y = app.screen.height/2;
 stage.addChild(player);
