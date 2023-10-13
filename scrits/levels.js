@@ -1,13 +1,82 @@
+const boundariesList = []
+
 const levelData = [
-	['grass', 'stone', 'grass', 'grass', 'grass', 'stone', 'grass'],
-	['grass', 'stone', 'grass', 'grass', 'grass', 'stone', 'grass'],
-	['grass', 'stone', 'stone', 'grass', 'stone', 'stone', 'grass'],
-	['grass', 'stone', 'grass', 'grass', 'grass', 'stone', 'grass'],
-	['stone', 'grass', 'stone', 'stone', 'stone', 'stone', 'stone'],
-	['grass', 'stone', 'grass', 'grass', 'grass', 'stone', 'grass'],
+	['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall'],
+	[
+		'wall',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'wall',
+	],
+	[
+		'wall',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'wall',
+	],
+	[
+		'wall',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'wall',
+	],
+	[
+		'wall',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'wall',
+	],
+	[
+		'wall',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'wall',
+	],
+	[
+		'wall',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'floor',
+		'wall',
+	],
+	['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall'],
 ]
 
-const levelGenerator = new LevelGenerator(app, TILE_SET, levelData)
+const levelGenerator = new LevelGenerator(
+	app,
+	TILE_SET,
+	levelData,
+	boundariesList
+)
 levelGenerator.generateLevel()
 
 // If you want to clear the level later:
