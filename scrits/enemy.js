@@ -22,20 +22,38 @@ function hasObstacleBetween(startX, startY, endX, endY) {
     return trigger;
 }
 
-//create_enemy(app.screen.width / 3 + 100, app.screen.height / 3 + 100)
-create_enemy(100, 100);
-
-app.ticker.add((delta) =>
-{
+function follow_player(enemy, player, speed, delta){
     let dx = player.x - enemies[0].x;
     let dy = player.y - enemies[0].y;
     let angle = Math.atan2(dy, dx);
-    let angleDifference = (Math.abs(enemies[0].rotation - angle)*180)/Math.PI;
-    if (angleDifference%360 <= 60) {
-        document.getElementById("found").innerHTML = "I CAN SEE YOU!!!";
+    let angleDifference = Math.abs((Math.abs(enemies[0].rotation) - Math.abs(angle)))*180/Math.PI;
 
+    const distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+
+    if ((angleDifference%360 <= 60) && (distance <= 150)) {
+        document.getElementById("found").innerHTML = "I CAN SEE YOU!!! - " + angleDifference+ "<br>DIST:" + distance;
+        enemies[0].rotation = angle;
+        const vx = Math.cos(angle) * speed;
+        const vy = Math.sin(angle) * speed;
+        if (distance > 0) {
+            enemy.x += vx;
+            enemy.y += vy;
+        }
+    } else if (distance <= 150) {
+        enemies[0].rotation += 0.1 * delta;
+        document.getElementById("found").innerHTML = "I CAN'T SEE YOU!"+ angleDifference+"<br>"+enemies[0].rotation*180/Math.PI+"<br>"+angle*180/Math.PI;
     } else {
-        document.getElementById("found").innerHTML = "I CAN'T SEE YOU!";
+        document.getElementById("found").innerHTML = "I CAN'T SEE YOU!"+ angleDifference+"<br>"+enemies[0].rotation*180/Math.PI+"<br>"+angle*180/Math.PI;
     }
+}
 
+
+
+//create_enemy(app.screen.width / 3 + 100, app.screen.height / 3 + 100)
+create_enemy(100, 100);
+
+
+app.ticker.add((delta) =>
+{
+    follow_player(enemies[0], player, 1, delta);
 });
