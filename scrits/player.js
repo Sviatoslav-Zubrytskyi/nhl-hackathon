@@ -23,49 +23,32 @@ const isColliding = (player, boundary) => {
 	return player.getBounds().intersects(boundary.getBounds())
 }
 
-const willCollide = (player, boundariesList, nextX, nextY) => {
-	const tempPlayer = new PIXI.Sprite(player.sprite)
-
-	tempPlayer.x = nextX
-	tempPlayer.y = nextY
-
-	for (const boundary of boundariesList) {
-		if (isColliding(tempPlayer, boundary)) return true
-	}
-	return false
-}
-
 app.ticker.add(() => {
-	if (keys[65]) {
-		const nextX = player.x - PLAYER_SPEED
-		const nextY = player.y
+	for (const boundary of boundariesList) {
+		if (isColliding(player, boundary)) {
+			// Prevent the player from moving
+			player.x = player.previousX // Restore the previous player position
+			player.y = player.previousY
+		}
+	}
+	// Store the previous player position for collision handling
+	player.previousX = player.x
+	player.previousY = player.y
 
+	if (keys[65]) {
 		// Left arrow key
-		if (!willCollide(player, boundariesList, nextX, nextY))
-			player.x -= PLAYER_SPEED
+		player.x -= PLAYER_SPEED
 	}
 	if (keys[68]) {
-		const nextX = player.x + PLAYER_SPEED + TILE_SIZE
-		const nextY = player.y
-
 		// Right arrow key
-		if (!willCollide(player, boundariesList, nextX, nextY))
-			player.x += PLAYER_SPEED
+		player.x += PLAYER_SPEED
 	}
 	if (keys[87]) {
-		const nextX = player.x
-		const nextY = player.y - PLAYER_SPEED
-
 		// Up arrow key
-		if (!willCollide(player, boundariesList, nextX, nextY))
-			player.y -= PLAYER_SPEED
+		player.y -= PLAYER_SPEED
 	}
 	if (keys[83]) {
-		const nextX = player.x
-		const nextY = player.y + PLAYER_SPEED + TILE_SIZE
-
 		// Down arrow key
-		if (!willCollide(player, boundariesList, nextX, nextY))
-			player.y += PLAYER_SPEED
+		player.y += PLAYER_SPEED
 	}
 })
