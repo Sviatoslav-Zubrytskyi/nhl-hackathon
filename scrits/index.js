@@ -9,6 +9,6 @@ const TILE_SET = {
 
 const BOUNDARIES_TYPE = ['wall', 'void']
 
-let app = new PIXI.Application({ width: 1920, height: 1080 })
+let app = new PIXI.Application({ width: 800, height: 800 })
 
 document.body.appendChild(app.view)
