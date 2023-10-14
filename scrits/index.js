@@ -26,6 +26,4 @@ document.body.appendChild(app.view)
 
 const worldContainer = new PIXI.Container()
 
-// worldContainer.scale.set(2)
-
 app.stage.addChild(worldContainer)
