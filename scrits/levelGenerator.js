@@ -20,6 +20,8 @@ class LevelGenerator {
 
 					if (BOUNDARIES_TYPE.includes(spriteType))
 						this.boundariesList.push(sprite)
+					
+					console.log(spriteType)
 
 					if (spriteType === 'enemySpawn') this.enemySpawnsList.push(sprite)
 				}

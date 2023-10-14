@@ -91,7 +91,6 @@ class Enemy {
 		this.sprite.texture = dead
 		player.points++
 		document.getElementById("score").innerHTML  = "Score: " + player.points;
-
 	}
 
 	hit_player(player){
@@ -101,12 +100,13 @@ class Enemy {
 
 }
 
-enemies.push(new Enemy(200, 200, 1, 5))
-enemies.push(new Enemy(200, 200, 2, 3))
-enemies.push(new Enemy(200, 200, 1.9, 4))
-enemies.push(new Enemy(200, 200, 1.4, 4))
-enemies.push(new Enemy(200, 200, 1.3, 4))
-enemies.push(new Enemy(200, 200, 1.7, 4))
+const minspeed = 1; // Minimum value
+const maxspeed = 4; // Maximum value
+const maxdmg = 20;
+for (const enemy of levelGenerator.enemySpawnsList) {
+	const randomSpeed = Math.random() * (maxspeed - minspeed) + minspeed;
+	enemies.push(new Enemy(enemy.x, enemy.y, randomSpeed, maxdmg/randomSpeed))
+}
 //create_enemy(app.screen.width / 3 + 100, app.screen.height / 3 + 100)
 
 app.ticker.add(delta => {
