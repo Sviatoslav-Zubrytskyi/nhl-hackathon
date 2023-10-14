@@ -26,9 +26,10 @@ class Player {
 			this.camera.x = this.player.x
 			this.camera.y = this.player.y
 
-			this.worldContainer.x = this.app.renderer.screen.width / 2 - this.camera.x
+			this.worldContainer.x =
+				this.app.renderer.screen.width / (2 * SCALE) - this.camera.x
 			this.worldContainer.y =
-				this.app.renderer.screen.height / 2 - this.camera.y
+				this.app.renderer.screen.height / (2 * SCALE) - this.camera.y
 
 			for (const boundary of this.boundariesList) {
 				if (isColliding(this.player, boundary)) {

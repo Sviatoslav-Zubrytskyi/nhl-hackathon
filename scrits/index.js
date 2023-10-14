@@ -19,8 +19,13 @@ const PLAYER_SPEED = 5
 
 let app = new PIXI.Application({ width: 1600, height: 800 })
 
+app.stage.scale.x = SCALE
+app.stage.scale.y = SCALE
+
 document.body.appendChild(app.view)
 
 const worldContainer = new PIXI.Container()
+
+// worldContainer.scale.set(2)
 
 app.stage.addChild(worldContainer)
