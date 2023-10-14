@@ -19,6 +19,16 @@ h1 {
 	left: 1500px;
 }
 */
+h2 {
+	color:white;
+	position: absolute;
+	top: 155px; 
+	left: 1500px;
+	background-color: black;
+	min-width: 180px;
+	padding:3px;
+	max-height:30px;
+}
 progress {
 	appearance: none;
 	background-color: white;
@@ -26,6 +36,9 @@ progress {
 	top: 130px; 
 	left: 1500px;
 	height: 20px;
+	width: 180px;
+	height:30px;
+	
 }
 #playButton {
 	position: absolute;

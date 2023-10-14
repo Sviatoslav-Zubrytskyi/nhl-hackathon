@@ -107,6 +107,8 @@ class Player {
 	die() {}
 }
 
+
+
 const isColliding = (player, boundary) => {
 	return player.getBounds().intersects(boundary.getBounds())
 }
