@@ -56,7 +56,7 @@ class Enemy {
 		}
 	}
 	hit_player(player){
-		player.health -= 1;
+		player.health -= 1	;
 		document.getElementById('found').innerHTML = player.health;
 	}
 

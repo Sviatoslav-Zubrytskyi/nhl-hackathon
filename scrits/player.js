@@ -3,7 +3,7 @@ class Player {
 		this.app = app
 		this.worldContainer = worldContainer
 		this.boundariesList = boundariesList
-
+		this.health = 100
 		this.player = PIXI.Sprite.from('assets/char_walk_left.gif')
 		this.player.x = 160
 		this.player.y = 160
