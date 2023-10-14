@@ -13,7 +13,7 @@ const levelData = [
 ]
 
 const levelGenerator = new LevelGenerator(
-	app,
+	worldContainer,
 	TILE_SET,
 	levelData,
 	boundariesList

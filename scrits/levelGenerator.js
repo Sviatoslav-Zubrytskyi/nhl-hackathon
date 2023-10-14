@@ -22,11 +22,11 @@ class LevelGenerator {
 				}
 			}
 		}
-		this.app.stage.addChild(this.container)
+		this.app.addChild(this.container)
 	}
 
 	clearLevel() {
-		this.app.stage.removeChild(this.container)
+		this.app.removeChild(this.container)
 		this.container.destroy({ children: true })
 		this.container = new PIXI.Container()
 	}

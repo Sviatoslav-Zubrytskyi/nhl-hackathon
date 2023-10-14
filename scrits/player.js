@@ -1,11 +1,12 @@
 const stage = app.stage
-const gameContainer = new PIXI.Container()
-stage.addChild(gameContainer)
 
 const player = PIXI.Sprite.from('assets/char_walk_left.gif')
+
 player.x = 160
 player.y = 160
-stage.addChild(player)
+
+worldContainer.addChild(player)
+const camera = { x: 0, y: 0 }
 
 const keys = {}
 
@@ -24,6 +25,12 @@ const isColliding = (player, boundary) => {
 }
 
 app.ticker.add(() => {
+	camera.x = player.x
+	camera.y = player.y
+
+	worldContainer.x = app.renderer.screen.width / 2 - camera.x
+	worldContainer.y = app.renderer.screen.height / 2 - camera.y
+
 	for (const boundary of boundariesList) {
 		if (isColliding(player, boundary)) {
 			// Prevent the player from moving

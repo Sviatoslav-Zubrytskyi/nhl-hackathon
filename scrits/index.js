@@ -17,6 +17,10 @@ const BOUNDARIES_TYPE = ['wall', 'void']
 
 const PLAYER_SPEED = 5
 
-let app = new PIXI.Application({ width: 800, height: 800 })
+let app = new PIXI.Application({ width: 1600, height: 800 })
 
 document.body.appendChild(app.view)
+
+const worldContainer = new PIXI.Container()
+
+app.stage.addChild(worldContainer)
