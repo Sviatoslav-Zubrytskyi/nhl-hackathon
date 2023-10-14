@@ -51,10 +51,10 @@ class Enemy {
 						this.hit = false;
 					}, 2000);
 				}
-				document.getElementById('found').innerHTML = player.health;
+				document.getElementById('found').innerHTML = "Health: " + player.health;
 			} else if (distance <= 150 && distance >= 5) {
 				this.lookangle += 0.1 * delta
-				document.getElementById('found').innerHTML = player.health;
+				document.getElementById('found').innerHTML = "Health: " + player.health;
 			} else if (distance <= 50 && !this.hit){
 					this.hit_player(player)
 					setTimeout(() => {
@@ -67,9 +67,10 @@ class Enemy {
 	hit_player(player){
 		player.health -= 10;
 		this.hit = true;
-		document.getElementById('found').innerHTML = player.health;
-	}
 
+
+	}
+	// method kill
 
 }
 
