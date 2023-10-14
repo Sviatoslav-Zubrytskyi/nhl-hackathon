@@ -2,9 +2,9 @@ const SCALE = 2
 const TILE_SIZE = 32
 
 const TILE_SET = {
-	floor: PIXI.Texture.from('../assets/grass.png'),
-	void: PIXI.Texture.from('../assets/stone.png'),
-	wall: PIXI.Texture.from('../assets/stone.png'),
+	floor: PIXI.Texture.from('../assets/floor.png'),
+	void: PIXI.Texture.from('../assets/wall.png'),
+	wall: PIXI.Texture.from('../assets/wall.jpg'),
 }
 
 const TILE_SET_DICT = {
