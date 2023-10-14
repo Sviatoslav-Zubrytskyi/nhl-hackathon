@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+
+    
+    <script>let diff = "easy1";</script>
+
+    <menu id="start-screen" class="screen">
+
+        <button type="button" class="play" onclick="startGame()">Play</button>
+        <button type="button" class="settings" onclick="openSettings()">Settings</button>
+        <button type="button" class="credits" onclick="openCredits()">Credits</button>
+    </menu>
+    <menu id="credits-screen" class="screen" style="display: none;">
+        <button type="button" class="goBack" onclick="goBack()">Go back</button>
+        <h2 class="red"> Team leader: Stephan </h2>
+        <h2> Developer: Svi</h2>
+        <h2> Developer: Arty</h2>
+        <h2> Developer: Viktor</h2>
+        <h2> Developer: Mich</h2>
+        <h2> Designer: Pixel_Poem</h2>
+
+    </menu>
+    <menu id="settings-screen" class="screen" style="display: none;">
+        <button type="button" class="goBack" onclick="goBack()">Go back</button>
+        <button type="button" id="difficulty" onclick="changeDiff()">Difficulty : Easy</button>
+        <button type="button">Volume: <input type="range"></button>
+
+    </menu>
+    
+    
+    
+    <canvas id="canvas" style="display:none"></canvas>
+    <script>
+        const diffAray = ["Easy", "Medium", "Hard"]
+        let count = 1;
+        function changeDiff() {
+            let d = document.querySelector("#difficulty");
+            d.textContent = "Difficulty: " + diffAray[count];
+            if (count == 2) count = 0;
+            else count++
+            
+            
+
+        }
+
+        
+        function startGame() {
+            console.log("start game")
+        }
+
+        function goBack() {
+            document.getElementById('start-screen').style.display = 'block';
+            document.getElementById('settings-screen').style.display = 'none'; // Hide the settings screen
+            document.getElementById('credits-screen').style.display = 'none';
+        }
+
+        function openCredits() {
+            // Hide the start screen and show the Credits screen
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('settings-screen').style.display = 'none'; // Hide the settings screen
+            document.getElementById('credits-screen').style.display = 'block';
+        }
+        
+        function openSettings() {
+            // Hide the start screen and show the Settings screen
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('credits-screen').style.display = 'none'; // Hide the credits screen
+            document.getElementById('settings-screen').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+</html>

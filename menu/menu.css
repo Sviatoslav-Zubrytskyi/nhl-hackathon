@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+}
+menu {
+    margin: 40vh 700px;
+    width: 500px;
+    background-color: black;
+}
+#credits-screen {
+    background-color: black;
+}
+h2 { 
+    margin: 0 0 0 10px;
+    color:white
+}
+
+button {
+    background-color: white;
+    width: 200px;
+    height:50px;
+    display: block;
+    margin: 10px;
+    font-size: large;
+    cursor: pointer;
+}
