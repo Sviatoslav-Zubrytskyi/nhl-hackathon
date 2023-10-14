@@ -6,7 +6,7 @@ class Enemy {
 	constructor(x, y) {
 		//const enemy = PIXI.Sprite.from('assets/enemy.png')
 		this.sprite = PIXI.Sprite.from('assets/enemy.png')
-		this.sprite.anchor.set(0.5)
+		this.sprite.anchor.set(0)
 		this.sprite.x = x
 		this.sprite.y = y
 		this.lookangle = 0
@@ -53,7 +53,7 @@ class Enemy {
 					this.hit_player(player)
 					setTimeout(() => {
 						this.hit = false;
-					}, 3000);
+					}, 2000);
 
 			}
 		}
