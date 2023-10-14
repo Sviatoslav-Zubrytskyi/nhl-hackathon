@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="playButton">Play Audio</button>
+    <audio id="myaudio" src="./assets/Монеточка-Нимфоманка.mp3" loop="loop"></audio>
+    <script> 
+        window.onload = function(){
+            var audio = document.getElementById("myaudio");
+            var playButton = document.getElementById("playButton");
+
+            playButton.addEventListener("click", function() {
+                audio.play();
+                console.log("Audio played");
+            });
+        }
+    </script>
+</body>
+</html>

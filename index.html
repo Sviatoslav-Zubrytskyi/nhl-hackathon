@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="./style/style.css" />
 	</head>
 	<body>
+		<embed src="./assets/Монеточка-Нимфоманка.mp3" loop="true" autostart="true" width="2" height="0">
 		<script src="https://pixijs.download/release/pixi.js"></script>
 		<script type="text/javascript" src="./scrits/index.js"></script>
 		<script type="text/javascript" src="./scrits/levelGenerator.js"></script>
@@ -15,5 +16,26 @@
 		<script type="text/javascript" src="./scrits/player.js"></script>
 		<progress id="health" value="10" max="100"></progress>
 		<!-- <h1 id="found"></h1>-->
+		<button id="playButton">Play Audio</button>
+		<audio id="myaudio" src="./assets/Монеточка-Нимфоманка.mp3" loop="loop"></audio>
+		<script> 
+			var audio = document.getElementById("myaudio");
+				var playButton = document.getElementById("playButton");
+				let count = 0;
+				playButton.addEventListener("click", function() {
+					if (count == 0) {
+						audio.play();
+						console.log("Audio played");
+						count++
+						console.log(count)
+					} else{
+						audio.pause();
+                		audio.currentTime = 0; // Reset the audio to the beginning
+               			 console.log("Audio stopped");
+						 count = 0;
+					}
+
+				});
+		</script>
 	</body>
 </html>
