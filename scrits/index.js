@@ -5,7 +5,7 @@ const TILE_SET = {
 	floor: PIXI.Texture.from('../assets/floor.png'),
 	void: PIXI.Texture.from('../assets/wall.png'),
 	wall: PIXI.Texture.from('../assets/wall.jpg'),
-	enemySpawn: PIXI.Texture.from('../assets/grass.png'),
+	enemySpawn: PIXI.Texture.from('../assets/floor.png'),
 }
 
 const TILE_SET_DICT = {

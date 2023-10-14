@@ -5,8 +5,13 @@ class Player {
 		this.boundariesList = boundariesList
 		this.health = 100
 
+<<<<<<< Updated upstream
 		this.player = PIXI.Sprite.from('assets/char_walk_left.gif')
 		this.heald = false;
+=======
+		this.player = PIXI.Sprite.from('assets/player.png')
+
+>>>>>>> Stashed changes
 		this.player.anchor.set(0)
 		this.player.x = 260
 		this.player.y = 260
