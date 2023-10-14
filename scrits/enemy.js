@@ -88,7 +88,7 @@ class Enemy {
 
 		const randomInt = Math.floor(Math.random() * (max - min) + min);
 		if(randomInt >= 3) {
-			player.health *= 1.15;
+			player.health *= 1.25;
 			if (player.health > 100) {
 				player.health = 100;
 			}
