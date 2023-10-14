@@ -6,7 +6,7 @@ class Player {
 		this.health = 100
 
 		this.player = PIXI.Sprite.from('assets/char_walk_left.gif')
-
+		this.heald = false;
 		this.player.anchor.set(0)
 		this.player.x = 260
 		this.player.y = 260
@@ -78,6 +78,12 @@ class Player {
 				if (this.keys[69]) {
 					// E key
 					this.attack()
+				}
+				if (this.keys[72]) {
+					if(!this.heald) {
+						this.health = 100;
+						this.heald = true;
+					}
 				}
 			})
 		}

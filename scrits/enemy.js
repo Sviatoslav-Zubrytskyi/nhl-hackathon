@@ -75,14 +75,7 @@ class Enemy {
 	}
 
 	die(){
-		enemyCounter--;
-		if (enemyCounter == 0) {
-			Swal.fire(
-				'Good job!',
-				'You could free the entire building of enemies!',
-				'success'
-			)
-		}
+
 		const min = 1;
 		const max = 5;
 
@@ -110,6 +103,14 @@ class Enemy {
 		this.sprite.texture = dead
 		player.points++
 		document.getElementById("score").innerHTML  = "Score: " + player.points;
+		if (player.points == 28) {
+			Swal.fire(
+				'Good job!',
+				'You could free the entire building of enemies!',
+				'success'
+			)
+		}
+
 	}
 
 	hit_player(player){
