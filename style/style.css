@@ -8,3 +8,12 @@ body {
 	display: grid;
 	place-items: center;
 }
+h1 {
+	border:solid;
+}
+#found {
+	background-color: white;
+	position: absolute;
+	top: 50px; 
+	left: 1500px;
+}
