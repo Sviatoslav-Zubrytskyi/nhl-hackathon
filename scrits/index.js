@@ -1,4 +1,4 @@
-const SCALE = 2
+const SCALE = 3
 const TILE_SIZE = 32
 
 const TILE_SET = {
@@ -20,7 +20,7 @@ const BOUNDARIES_TYPE = ['wall', 'void']
 
 const PLAYER_SPEED = 5
 
-let app = new PIXI.Application({ width: 1600, height: 800 })
+let app = new PIXI.Application({ width: 1920, height: 1080 })
 
 app.stage.scale.x = SCALE
 app.stage.scale.y = SCALE
