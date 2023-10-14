@@ -1,61 +1,70 @@
-const stage = app.stage
+class Player {
+	constructor(app, worldContainer, boundariesList) {
+		this.app = app
+		this.worldContainer = worldContainer
+		this.boundariesList = boundariesList
 
-const player = PIXI.Sprite.from('assets/char_walk_left.gif')
+		this.player = PIXI.Sprite.from('assets/char_walk_left.gif')
+		this.player.x = 160
+		this.player.y = 160
 
-player.x = 160
-player.y = 160
+		this.camera = { x: 0, y: 0 }
+		this.keys = {}
+	}
 
-worldContainer.addChild(player)
-const camera = { x: 0, y: 0 }
+	init() {
+		this.worldContainer.addChild(this.player)
 
-const keys = {}
+		window.addEventListener('keydown', event => {
+			this.keys[event.keyCode] = true
+		})
+		window.addEventListener('keyup', event => {
+			this.keys[event.keyCode] = false
+		})
 
-// Listen for keydown events to set keys[keyCode] to true.
-window.addEventListener('keydown', event => {
-	keys[event.keyCode] = true
-})
+		this.app.ticker.add(() => {
+			this.camera.x = this.player.x
+			this.camera.y = this.player.y
 
-// Listen for keyup events to set keys[keyCode] to false.
-window.addEventListener('keyup', event => {
-	keys[event.keyCode] = false
-})
+			this.worldContainer.x = this.app.renderer.screen.width / 2 - this.camera.x
+			this.worldContainer.y =
+				this.app.renderer.screen.height / 2 - this.camera.y
+
+			for (const boundary of this.boundariesList) {
+				if (isColliding(this.player, boundary)) {
+					// Prevent the player from moving
+					this.player.x = this.player.previousX // Restore the previous player position
+					this.player.y = this.player.previousY
+				}
+			}
+			// Store the previous player position for collision handling
+			this.player.previousX = this.player.x
+			this.player.previousY = this.player.y
+
+			if (this.keys[65]) {
+				// Left arrow key
+				this.player.x -= PLAYER_SPEED
+			}
+			if (this.keys[68]) {
+				// Right arrow key
+				this.player.x += PLAYER_SPEED
+			}
+			if (this.keys[87]) {
+				// Up arrow key
+				this.player.y -= PLAYER_SPEED
+			}
+			if (this.keys[83]) {
+				// Down arrow key
+				this.player.y += PLAYER_SPEED
+			}
+		})
+	}
+}
 
 const isColliding = (player, boundary) => {
 	return player.getBounds().intersects(boundary.getBounds())
 }
 
-app.ticker.add(() => {
-	camera.x = player.x
-	camera.y = player.y
+const player = new Player(app, worldContainer, boundariesList)
 
-	worldContainer.x = app.renderer.screen.width / 2 - camera.x
-	worldContainer.y = app.renderer.screen.height / 2 - camera.y
-
-	for (const boundary of boundariesList) {
-		if (isColliding(player, boundary)) {
-			// Prevent the player from moving
-			player.x = player.previousX // Restore the previous player position
-			player.y = player.previousY
-		}
-	}
-	// Store the previous player position for collision handling
-	player.previousX = player.x
-	player.previousY = player.y
-
-	if (keys[65]) {
-		// Left arrow key
-		player.x -= PLAYER_SPEED
-	}
-	if (keys[68]) {
-		// Right arrow key
-		player.x += PLAYER_SPEED
-	}
-	if (keys[87]) {
-		// Up arrow key
-		player.y -= PLAYER_SPEED
-	}
-	if (keys[83]) {
-		// Down arrow key
-		player.y += PLAYER_SPEED
-	}
-})
+player.init()
