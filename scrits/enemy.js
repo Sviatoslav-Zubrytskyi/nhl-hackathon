@@ -45,11 +45,17 @@ class Enemy {
 				const vy = Math.sin(angle) * speed
 				this.sprite.x += vx
 				this.sprite.y += vy
+				if (distance <= 20 && !this.hit) {
+					this.hit_player(player)
+					setTimeout(() => {
+						this.hit = false;
+					}, 2000);
+				}
 				document.getElementById('found').innerHTML = player.health;
 			} else if (distance <= 150 && distance >= 5) {
 				this.lookangle += 0.1 * delta
 				document.getElementById('found').innerHTML = player.health;
-			} else if (distance <= 5 && !this.hit){
+			} else if (distance <= 50 && !this.hit){
 					this.hit_player(player)
 					setTimeout(() => {
 						this.hit = false;
@@ -83,8 +89,13 @@ function hasObstacleBetween(startX, startY, endX, endY) {
 }
 
 let Enemy1 = new Enemy(100, 100);
+let Enemy2 = new Enemy(200, 200);
+let Enemy3 = new Enemy(100, 200);
 //create_enemy(app.screen.width / 3 + 100, app.screen.height / 3 + 100)
 
 app.ticker.add(delta => {
 	enemies[0].follow_player(player, 1, delta)
+	enemies[1].follow_player(player, 0.9, delta)
+	enemies[2].follow_player(player, 1.3, delta)
+
 })
