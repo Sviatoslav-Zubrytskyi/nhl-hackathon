@@ -5,6 +5,7 @@ class Player {
 		this.boundariesList = boundariesList
 		this.health = 100
 		this.player = PIXI.Sprite.from('assets/char_walk_left.gif')
+		this.player.anchor.set(0)
 		this.player.x = 160
 		this.player.y = 160
 

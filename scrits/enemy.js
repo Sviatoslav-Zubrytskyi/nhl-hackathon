@@ -3,7 +3,7 @@ let enemies = []
 //playery = 100;
 
 class Enemy {
-	constructor(x, y) {
+	constructor(x, y, speed, damage) {
 		//const enemy = PIXI.Sprite.from('assets/enemy.png')
 		this.sprite = PIXI.Sprite.from('assets/enemy.png')
 		this.sprite.anchor.set(0)
@@ -13,11 +13,11 @@ class Enemy {
 		this.hit = false;
 		worldContainer.addChild(this.sprite)
 		this.health = 100;
-		enemies.push(this)
-
+		this.speed = speed;
+		this.damage = damage;
 	}
 
-	follow_player(player, speed, delta) {
+	follow_player(player, delta) {
 		let coltrig = false
 		for (const boundary of boundariesList) {
 			if (isColliding(this.sprite, boundary)) {
@@ -38,11 +38,9 @@ class Enemy {
 			const distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
 
 			if (angleDifference % 360 <= 60 && distance <= 150) {
-				document.getElementById('found').innerHTML =
-					'I CAN SEE YOU!!! - ' + angleDifference + '<br>DIST:' + distance
 				this.lookangle = angle
-				const vx = Math.cos(angle) * speed
-				const vy = Math.sin(angle) * speed
+				const vx = Math.cos(angle) * this.speed
+				const vy = Math.sin(angle) * this.speed
 				this.sprite.x += vx
 				this.sprite.y += vy
 				if (distance <= 20 && !this.hit) {
@@ -51,10 +49,8 @@ class Enemy {
 						this.hit = false;
 					}, 2000);
 				}
-				document.getElementById('found').innerHTML = player.health;
 			} else if (distance <= 150 && distance >= 5) {
 				this.lookangle += 0.1 * delta
-				document.getElementById('found').innerHTML = player.health;
 			} else if (distance <= 50 && !this.hit){
 					this.hit_player(player)
 					setTimeout(() => {
@@ -65,37 +61,21 @@ class Enemy {
 		}
 	}
 	hit_player(player){
-		player.health -= 10;
+		player.health -= this.damage;
 		this.hit = true;
-		document.getElementById('found').innerHTML = player.health;
 	}
 
 
 }
 
-function hasObstacleBetween(startX, startY, endX, endY) {
-	const distance = Math.sqrt(
-		Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2)
-	)
-	const stepX = (endX - startX) / distance
-	const stepY = (endY - startY) / distance
-	let trigger = false
-	for (let t = 0; t < distance; t += 5) {
-		const x = startX + stepX * t
-		const y = startY + stepY * t
-		trigger = true
-	}
-	return trigger
-}
-
-let Enemy1 = new Enemy(100, 100);
-let Enemy2 = new Enemy(200, 200);
-let Enemy3 = new Enemy(100, 200);
+enemies.push(new Enemy(200, 100, 1, 5))
+enemies.push(new Enemy(200, 200, 2, 3))
+enemies.push(new Enemy(200, 200, 1.5, 4))
 //create_enemy(app.screen.width / 3 + 100, app.screen.height / 3 + 100)
 
 app.ticker.add(delta => {
-	enemies[0].follow_player(player, 1, delta)
-	enemies[1].follow_player(player, 0.9, delta)
-	enemies[2].follow_player(player, 1.3, delta)
-
+	document.getElementById('found').innerHTML = "Health: " + player.health;
+	for (const enemy of enemies) {
+		enemy.follow_player(player,  delta)
+	}
 })
