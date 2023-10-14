@@ -75,6 +75,17 @@ class Enemy {
 	}
 
 	die(){
+		const min = 1;
+		const max = 5;
+
+		const randomInt = Math.floor(Math.random() * (max - min) + min);
+		if(randomInt >= 3) {
+			player.health *= 1.15;
+			if (player.health > 100) {
+				player.health = 100;
+			}
+		}
+
 		this.health = 0;
 		var background = document.getElementById("myaudio");
 		background.pause();

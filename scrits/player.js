@@ -10,7 +10,7 @@ class Player {
 		this.player.anchor.set(0)
 		this.player.x = 260
 		this.player.y = 260
-
+		this.alive = true;
 		this.sword = PIXI.Sprite.from('assets/sword.png')
 		this.sword.isrotating = false;
 		this.sword.num = 1;
@@ -21,64 +21,67 @@ class Player {
 	}
 
 	init() {
-		this.worldContainer.addChild(this.player)
-		this.player.addChild(this.sword)
+		if(this.alive) {
+			this.worldContainer.addChild(this.player)
+			this.player.addChild(this.sword)
 
-		// this.sword.pivot.set(this.sword.width / 2, this.sword.height)
+			// this.sword.pivot.set(this.sword.width / 2, this.sword.height)
 
-		window.addEventListener('keydown', event => {
-			this.keys[event.keyCode] = true
-		})
-		window.addEventListener('keyup', event => {
-			this.keys[event.keyCode] = false
-		})
+			window.addEventListener('keydown', event => {
+				this.keys[event.keyCode] = true
+			})
+			window.addEventListener('keyup', event => {
+				this.keys[event.keyCode] = false
+			})
 
-		document.addEventListener('click', () => this.shot(this.player))
+			document.addEventListener('click', () => this.shot(this.player))
 
-		this.app.ticker.add(() => {
-			this.camera.x = this.player.x
-			this.camera.y = this.player.y
+			this.app.ticker.add(() => {
+				this.camera.x = this.player.x
+				this.camera.y = this.player.y
 
-			this.sword.position.set(0, 28)
-			this.sword.pivot.set(0, 28)
+				this.sword.position.set(0, 28)
+				this.sword.pivot.set(0, 28)
 
-			this.worldContainer.x =
-				this.app.renderer.screen.width / (2 * SCALE) - this.camera.x
-			this.worldContainer.y =
-				this.app.renderer.screen.height / (2 * SCALE) - this.camera.y
+				this.worldContainer.x =
+					this.app.renderer.screen.width / (2 * SCALE) - this.camera.x
+				this.worldContainer.y =
+					this.app.renderer.screen.height / (2 * SCALE) - this.camera.y
 
-			for (const boundary of this.boundariesList) {
-				if (isColliding(this.player, boundary)) {
-					// Prevent the player from moving
-					this.player.x = this.player.previousX // Restore the previous player position
-					this.player.y = this.player.previousY
+				for (const boundary of this.boundariesList) {
+					if (isColliding(this.player, boundary)) {
+						// Prevent the player from moving
+						this.player.x = this.player.previousX // Restore the previous player position
+						this.player.y = this.player.previousY
+					}
 				}
-			}
-			// Store the previous player position for collision handling
-			this.player.previousX = this.player.x
-			this.player.previousY = this.player.y
+				// Store the previous player position for collision handling
+				this.player.previousX = this.player.x
+				this.player.previousY = this.player.y
 
-			if (this.keys[65]) {
-				// Left arrow key
-				this.player.x -= PLAYER_SPEED
-			}
-			if (this.keys[68]) {
-				// Right arrow key
-				this.player.x += PLAYER_SPEED
-			}
-			if (this.keys[87]) {
-				// Up arrow key
-				this.player.y -= PLAYER_SPEED
-			}
-			if (this.keys[83]) {
-				// Down arrow key
-				this.player.y += PLAYER_SPEED
-			}
-			if (this.keys[69]) {
-				// E key
-				this.attack()
-			}
-		})
+				if (this.keys[65]) {
+					// Left arrow key
+					this.player.x -= PLAYER_SPEED
+				}
+				if (this.keys[68]) {
+					// Right arrow key
+					this.player.x += PLAYER_SPEED
+				}
+				if (this.keys[87]) {
+					// Up arrow key
+					this.player.y -= PLAYER_SPEED
+				}
+				if (this.keys[83]) {
+					// Down arrow key
+					this.player.y += PLAYER_SPEED
+				}
+				if (this.keys[69]) {
+					// E key
+					this.attack()
+				}
+			})
+		}
+
 	}
 
 	attack() {
@@ -118,7 +121,24 @@ class Player {
 
 	shot(player) {}
 
-	die() {}
+	die() {
+		enemies = null;
+		this.alive = false;
+		Swal.fire({
+			icon: 'Looser',
+			title: 'Oops...',
+			text: "You couldn't defeat all enemies!",
+			showCancelButton: true,
+			confirmButtonText: 'Continue',
+			cancelButtonText: 'Exit',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				alert("Continue!");
+			} else {
+				window.location.href = "menu/menu.html";
+			}
+		});
+	}
 }
 
 
