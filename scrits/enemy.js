@@ -10,6 +10,7 @@ class Enemy {
 		this.sprite.x = x
 		this.sprite.y = y
 		this.lookangle = 0
+		this.hit = false;
 		worldContainer.addChild(this.sprite)
 		this.health = 100;
 		enemies.push(this)
@@ -27,7 +28,7 @@ class Enemy {
 		}
 		if (!coltrig) {
 			this.sprite.previousX = this.sprite.x
-			this.sprite.previousY = this.sprite.y
+				this.sprite.previousY = this.sprite.y
 			let dx = player.player.x - this.sprite.x
 			let dy = player.player.y - this.sprite.y
 			let angle = Math.atan2(dy, dx)
@@ -44,19 +45,22 @@ class Enemy {
 				const vy = Math.sin(angle) * speed
 				this.sprite.x += vx
 				this.sprite.y += vy
-			} else if (distance <= 150 && distance >= 20) {
+				document.getElementById('found').innerHTML = player.health;
+			} else if (distance <= 150 && distance >= 5) {
 				this.lookangle += 0.1 * delta
-			} else {
-				this.hit_player(player)
-				const vx = Math.cos(angle) * speed
-				const vy = Math.sin(angle) * speed
-				this.sprite.x -= vx
-				this.sprite.y -= vy
+				document.getElementById('found').innerHTML = player.health;
+			} else if (distance <= 5 && !this.hit){
+					this.hit_player(player)
+					setTimeout(() => {
+						this.hit = false;
+					}, 3000);
+
 			}
 		}
 	}
 	hit_player(player){
 		player.health -= 10;
+		this.hit = true;
 		document.getElementById('found').innerHTML = player.health;
 	}
 
