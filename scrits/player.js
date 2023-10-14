@@ -63,6 +63,8 @@ class Player {
 	}
 }
 
+
+
 const isColliding = (player, boundary) => {
 	return player.getBounds().intersects(boundary.getBounds())
 }

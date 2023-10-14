@@ -81,6 +81,8 @@ class Enemy {
 		},2000);
 		this.alive = false;
 		this.sprite.texture = dead
+		player.points++
+		document.getElementById("score").innerHTML  = "Score: " + player.points;
 
 	}
 
@@ -88,7 +90,6 @@ class Enemy {
 		player.health -= this.damage;
 		this.health -= 20;
 		this.hit = true;
-		player.points ++;
 	}
 
 }
