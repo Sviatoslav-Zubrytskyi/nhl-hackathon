@@ -114,6 +114,7 @@ class Enemy {
 	}
 
 	hit_player(player){
+		shakeScreen(40, 2);
 		player.health -= this.damage;
 		if (player.health <= 0) {
 			player.die();
