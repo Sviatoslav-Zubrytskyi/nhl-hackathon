@@ -20,7 +20,18 @@ const BOUNDARIES_TYPE = ['wall', 'void']
 
 const PLAYER_SPEED = 5
 
-let app = new PIXI.Application({ width: 1920, height: 1080 })
+let app = new PIXI.Application({ autoResize: true })
+
+const resizeApp = () => {
+	const newWidth = window.innerWidth
+	const newHeight = window.innerHeight
+
+	app.renderer.resize(newWidth, newHeight)
+}
+
+resizeApp()
+
+window.addEventListener('resize', resizeApp)
 
 app.stage.scale.x = SCALE
 app.stage.scale.y = SCALE
