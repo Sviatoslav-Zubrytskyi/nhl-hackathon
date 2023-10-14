@@ -28,8 +28,8 @@ class Enemy {
 		if (!coltrig) {
 			this.sprite.previousX = this.sprite.x
 			this.sprite.previousY = this.sprite.y
-			let dx = player.x - this.sprite.x
-			let dy = player.y - this.sprite.y
+			let dx = player.player.x - this.sprite.x
+			let dy = player.player.y - this.sprite.y
 			let angle = Math.atan2(dy, dx)
 			let angleDifference =
 				(Math.abs(Math.abs(this.lookangle) - Math.abs(angle)) * 180) / Math.PI
@@ -56,7 +56,7 @@ class Enemy {
 		}
 	}
 	hit_player(player){
-		player.health -= 1	;
+		player.health -= 10;
 		document.getElementById('found').innerHTML = player.health;
 	}
 
