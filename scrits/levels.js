@@ -1,14 +1,23 @@
+const boundariesList = []
+
 const levelData = [
-	['grass', 'stone', 'grass', 'grass', 'grass', 'stone', 'grass'],
-	['grass', 'stone', 'grass', 'grass', 'grass', 'stone', 'grass'],
-	['grass', 'stone', 'stone', 'grass', 'stone', 'stone', 'grass'],
-	['grass', 'stone', 'grass', 'grass', 'grass', 'stone', 'grass'],
-	['stone', 'grass', 'stone', 'stone', 'stone', 'stone', 'stone'],
-	['grass', 'stone', 'grass', 'grass', 'grass', 'stone', 'grass'],
+	[1, 1, 1, 1, 1, 1, 1, 1, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 1, 1, 1, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 2, 2, 2, 2, 2, 2, 2, 1],
+	[1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
-const levelGenerator = new LevelGenerator(app, TILE_SET, levelData)
+const levelGenerator = new LevelGenerator(
+	app,
+	TILE_SET,
+	levelData,
+	boundariesList
+)
 levelGenerator.generateLevel()
-
 // If you want to clear the level later:
 // levelGenerator.clearLevel();

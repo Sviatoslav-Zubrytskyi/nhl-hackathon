@@ -2,25 +2,21 @@ const SCALE = 2
 const TILE_SIZE = 32
 
 const TILE_SET = {
-	grass: PIXI.Texture.from('../assets/grass.png'),
-	stone: PIXI.Texture.from('../assets/stone.png'),
+	floor: PIXI.Texture.from('../assets/grass.png'),
+	void: PIXI.Texture.from('../assets/stone.png'),
+	wall: PIXI.Texture.from('../assets/stone.png'),
 }
 
-let app = new PIXI.Application({ width: 1920, height: 1080 })
+const TILE_SET_DICT = {
+	0: 'void',
+	1: 'wall',
+	2: 'floor',
+}
 
-app.stage.scale.x = SCALE
-app.stage.scale.y = SCALE
+const BOUNDARIES_TYPE = ['wall', 'void']
+
+const PLAYER_SPEED = 5
+
+let app = new PIXI.Application({ width: 800, height: 800 })
 
 document.body.appendChild(app.view)
-
-const player = PIXI.Sprite.from('assets/player.png')
-player.anchor.set(0.5)
-
-player.x = app.screen.width / 2
-player.y = app.screen.height / 2
-
-app.stage.addChild(player)
-
-app.ticker.add(delta => {
-	player.rotation += 0.1 * delta
-})
