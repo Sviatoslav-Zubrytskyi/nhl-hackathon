@@ -74,6 +74,9 @@ enemies.push(new Enemy(200, 200, 1.5, 4))
 
 app.ticker.add(delta => {
 	document.getElementById('found').innerHTML = "Health: " + player.health;
+
+	let healthBarValue = document.getElementById("health");
+	healthBarValue.value = player.health;
 	for (const enemy of enemies) {
 		enemy.follow_player(player,  delta)
 	}

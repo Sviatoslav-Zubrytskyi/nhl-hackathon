@@ -17,3 +17,6 @@ h1 {
 	top: 50px; 
 	left: 1500px;
 }
+progress {
+	background-color: red
+}
