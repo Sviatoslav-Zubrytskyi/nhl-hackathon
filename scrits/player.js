@@ -8,8 +8,8 @@ class Player {
 		this.player = PIXI.Sprite.from('assets/char_walk_left.gif')
 
 		this.player.anchor.set(0)
-		this.player.x = 160
-		this.player.y = 160
+		this.player.x = 260
+		this.player.y = 260
 
 		this.sword = PIXI.Sprite.from('assets/sword.png')
 		this.sword.isrotating = false;
