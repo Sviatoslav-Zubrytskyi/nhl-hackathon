@@ -101,7 +101,7 @@ class Enemy {
 
 }
 
-enemies.push(new Enemy(200, 100, 1, 5))
+enemies.push(new Enemy(200, 200, 1, 5))
 enemies.push(new Enemy(200, 200, 2, 3))
 enemies.push(new Enemy(200, 200, 1.9, 4))
 enemies.push(new Enemy(200, 200, 1.4, 4))
