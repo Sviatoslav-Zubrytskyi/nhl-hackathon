@@ -75,6 +75,14 @@ class Enemy {
 	}
 
 	die(){
+		enemyCounter--;
+		if (enemyCounter == 0) {
+			Swal.fire(
+				'Good job!',
+				'You could free the entire building of enemies!',
+				'success'
+			)
+		}
 		const min = 1;
 		const max = 5;
 
@@ -106,6 +114,9 @@ class Enemy {
 
 	hit_player(player){
 		player.health -= this.damage;
+		if (player.health <= 0) {
+			player.die();
+		}
 		this.hit = true;
 	}
 
@@ -114,6 +125,7 @@ class Enemy {
 const minspeed = 1; // Minimum value
 const maxspeed = 4; // Maximum value
 const maxdmg = 20;
+let enemyCounter = levelGenerator.length;
 for (const enemy of levelGenerator.enemySpawnsList) {
 	const randomSpeed = Math.random() * (maxspeed - minspeed) + minspeed;
 	enemies.push(new Enemy(enemy.x, enemy.y, randomSpeed, maxdmg/randomSpeed))

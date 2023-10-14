@@ -60,6 +60,11 @@
       <recent name="E:\Hackaton\nhl-hackathon\assets" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="enemy.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="enemy.js" working-dir="$PROJECT_DIR$/scrits">
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -69,7 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1697219320726</updated>
       <workItem from="1697219321750" duration="36742000" />
-      <workItem from="1697273593665" duration="3218000" />
+      <workItem from="1697273593665" duration="4371000" />
     </task>
     <servers />
   </component>

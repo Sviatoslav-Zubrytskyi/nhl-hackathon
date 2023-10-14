@@ -133,7 +133,7 @@ class Player {
 			cancelButtonText: 'Exit',
 		}).then((result) => {
 			if (result.isConfirmed) {
-				alert("Continue!");
+				window.location.reload();
 			} else {
 				window.location.href = "menu/menu.html";
 			}
