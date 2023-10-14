@@ -11,7 +11,11 @@ menu {
 }
 h2 { 
     margin: 0 0 0 10px;
-    color:white
+    color:white;
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
 }
 
 button {

@@ -2,10 +2,12 @@ let enemies = []
 //playerx = 100;
 //playery = 100;
 
+const alive = PIXI.Texture.from('assets/enemy.png');
+const dead = PIXI.Texture.from('assets/dead.png');
 class Enemy {
-	constructor(x, y) {
+	constructor(x, y, speed, damage) {
 		//const enemy = PIXI.Sprite.from('assets/enemy.png')
-		this.sprite = PIXI.Sprite.from('assets/enemy.png')
+		this.sprite = new PIXI.Sprite(alive)
 		this.sprite.anchor.set(0)
 		this.sprite.x = x
 		this.sprite.y = y
@@ -13,78 +15,95 @@ class Enemy {
 		this.hit = false;
 		worldContainer.addChild(this.sprite)
 		this.health = 100;
-		enemies.push(this)
-
+		this.speed = speed;
+		this.damage = damage;
+		this.alive = true;
 	}
 
-	follow_player(player, speed, delta) {
-		let coltrig = false
-		for (const boundary of boundariesList) {
-			if (isColliding(this.sprite, boundary)) {
-				this.sprite.x = this.sprite.previousX
-				this.sprite.y = this.sprite.previousY
-				coltrig = true
+	follow_player(player, delta) {
+		if(this.health > 0) {
+			let coltrig = false
+			for (const boundary of boundariesList) {
+				if (isColliding(this.sprite, boundary)) {
+					this.sprite.x = this.sprite.previousX
+					this.sprite.y = this.sprite.previousY
+					coltrig = true
+				}
 			}
-		}
-		if (!coltrig) {
-			this.sprite.previousX = this.sprite.x
+			if (!coltrig) {
+				this.sprite.previousX = this.sprite.x
 				this.sprite.previousY = this.sprite.y
-			let dx = player.player.x - this.sprite.x
-			let dy = player.player.y - this.sprite.y
-			let angle = Math.atan2(dy, dx)
-			let angleDifference =
-				(Math.abs(Math.abs(this.lookangle) - Math.abs(angle)) * 180) / Math.PI
+				let dx = player.player.x - this.sprite.x
+				let dy = player.player.y - this.sprite.y
+				let angle = Math.atan2(dy, dx)
+				let angleDifference =
+					(Math.abs(Math.abs(this.lookangle) - Math.abs(angle)) * 180) / Math.PI
 
-			const distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
+				const distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
 
-			if (angleDifference % 360 <= 60 && distance <= 150) {
-				document.getElementById('found').innerHTML =
-					'I CAN SEE YOU!!! - ' + angleDifference + '<br>DIST:' + distance
-				this.lookangle = angle
-				const vx = Math.cos(angle) * speed
-				const vy = Math.sin(angle) * speed
-				this.sprite.x += vx
-				this.sprite.y += vy
-				document.getElementById('found').innerHTML = player.health;
-			} else if (distance <= 150 && distance >= 5) {
-				this.lookangle += 0.1 * delta
-				document.getElementById('found').innerHTML = player.health;
-			} else if (distance <= 5 && !this.hit){
+				if (angleDifference % 360 <= 60 && distance <= 150) {
+					this.lookangle = angle
+					const vx = Math.cos(angle) * this.speed
+					const vy = Math.sin(angle) * this.speed
+					this.sprite.x += vx
+					this.sprite.y += vy
+					if (distance <= 20 && !this.hit) {
+						this.hit_player(player)
+						setTimeout(() => {
+							this.hit = false;
+						}, 2000);
+					}
+				} else if (distance <= 150 && distance >= 5) {
+					this.lookangle += 0.1 * delta
+				} else if (distance <= 50 && !this.hit){
 					this.hit_player(player)
 					setTimeout(() => {
 						this.hit = false;
 					}, 2000);
 
+				}
 			}
+		} else if (this.alive){
+			this.die();
 		}
+
 	}
+
+	die(){
+		var background = document.getElementById("myaudio");
+		background.pause();
+		var audio = document.getElementById("death-audio");
+		let text_audio = "assets/death"+(Math.floor(Math.random() * 2) + 1)+".mp3";
+		audio.src=text_audio;
+		audio.play();
+		setTimeout(() => {
+				background.play();
+		},2000);
+		this.alive = false;
+		this.sprite.texture = dead
+
+	}
+
 	hit_player(player){
-		player.health -= 10;
+		player.health -= this.damage;
+		this.health -= 20;
 		this.hit = true;
-		document.getElementById('found').innerHTML = player.health;
+		player.points ++;
 	}
-
 
 }
 
-function hasObstacleBetween(startX, startY, endX, endY) {
-	const distance = Math.sqrt(
-		Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2)
-	)
-	const stepX = (endX - startX) / distance
-	const stepY = (endY - startY) / distance
-	let trigger = false
-	for (let t = 0; t < distance; t += 5) {
-		const x = startX + stepX * t
-		const y = startY + stepY * t
-		trigger = true
-	}
-	return trigger
-}
-
-let Enemy1 = new Enemy(100, 100);
+enemies.push(new Enemy(200, 100, 1, 5))
+enemies.push(new Enemy(200, 200, 2, 3))
+enemies.push(new Enemy(200, 200, 1.5, 4))
 //create_enemy(app.screen.width / 3 + 100, app.screen.height / 3 + 100)
 
 app.ticker.add(delta => {
-	enemies[0].follow_player(player, 1, delta)
+	//document.getElementById('found').innerHTML = "Health: " + player.health;
+
+	let healthBarValue = document.getElementById("health");
+	healthBarValue.value = player.health;
+	for (const enemy of enemies) {
+		enemy.follow_player(player,  delta)
+	}
 })

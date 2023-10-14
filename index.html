@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="./style/style.css" />
 	</head>
 	<body>
+		<embed src="./assets/Монеточка-Нимфоманка.mp3" loop="true" autostart="true" width="2" height="0">
 		<script src="https://pixijs.download/release/pixi.js"></script>
 		<script type="text/javascript" src="./scrits/index.js"></script>
 		<script type="text/javascript" src="./scrits/levelGenerator.js"></script>
@@ -14,6 +15,10 @@
 		<script type="text/javascript" src="./scrits/levels.js"></script>
 		<script type="text/javascript" src="./scrits/enemy.js"></script>
 		<script type="text/javascript" src="./scrits/player.js"></script>
-		<h1 id="found"></h1>
+		<progress id="health" value="10" max="100"></progress>
+		<button id="playButton"><img id="muter" src="./assets/Sound_Muter.png" alt="sound"></button>
+		<audio id="myaudio" src="./assets/Монеточка-Нимфоманка.mp3" loop="loop"></audio>
+		<audio id="death-audio" src="assets/death1.mp3"></audio>
+		<script src="./scrits/audio.js"></script>
 	</body>
 </html>
