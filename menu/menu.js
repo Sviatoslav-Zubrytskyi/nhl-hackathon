@@ -9,7 +9,20 @@ const diffAray = ["Easy", "Medium", "Hard"]
             
 
         }
-
+        function showControls() {
+            Swal.fire({
+                title: 'Game Controls',
+                html: 'Use the following controls to play the game:<br>' +
+                    '<ul style="text-align: left; margin-left: 20px;">' +
+                    '<li><b>W, A, S, D:</b> Use these keys to move your character.</li>' +
+                    '<li><b>E:</b> Press E to shoot.</li>' +
+                    '<li><b>H:</b> Press H to heal yourself (only one time).</li>' +
+                    '</ul>',
+                icon: 'info',
+                confirmButtonText: 'Got it!',
+                allowOutsideClick: false,
+            });
+        }
         
         function startGame() {
             console.log("start game")
