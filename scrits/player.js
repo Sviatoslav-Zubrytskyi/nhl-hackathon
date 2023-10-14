@@ -8,7 +8,7 @@ class Player {
 		this.player.anchor.set(0)
 		this.player.x = 160
 		this.player.y = 160
-
+		this.points = 0;
 		this.camera = { x: 0, y: 0 }
 		this.keys = {}
 	}

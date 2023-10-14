@@ -70,18 +70,25 @@ class Enemy {
 	}
 
 	die(){
+		var background = document.getElementById("myaudio");
+		background.pause();
 		var audio = document.getElementById("death-audio");
 		let text_audio = "assets/death"+(Math.floor(Math.random() * 2) + 1)+".mp3";
 		audio.src=text_audio;
 		audio.play();
+		setTimeout(() => {
+				background.play();
+		},2000);
 		this.alive = false;
 		this.sprite.texture = dead
+
 	}
 
 	hit_player(player){
 		player.health -= this.damage;
 		this.health -= 20;
 		this.hit = true;
+		player.points ++;
 	}
 
 }
