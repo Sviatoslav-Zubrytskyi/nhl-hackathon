@@ -12,7 +12,8 @@ class Player {
 		this.player.y = 160
 
 		this.sword = PIXI.Sprite.from('assets/sword.png')
-
+		this.sword.isrotating = false;
+		this.sword.num = 1;
 		this.points = 0
 
 		this.camera = { x: 0, y: 0 }
@@ -81,26 +82,38 @@ class Player {
 	}
 
 	attack() {
-		let isRotating = false
-		let targetRotation = 0
-		let rotationSpeed = 0.25
-
-		if (!isRotating) {
-			targetRotation = Math.PI * 2 // 360 degrees in radians
-			isRotating = true
-
-			app.ticker.add(() => {
-				if (isRotating) {
-					if (this.sword.rotation < targetRotation) {
-						this.sword.rotation += rotationSpeed
-					} else {
-						isRotating = false
-						this.sword.rotation = 0
-						app.ticker.remove(this.sword)
-					}
-				}
-			})
+		if (this.sword.isRotating) {
+			return;
 		}
+		var audio = document.getElementById("sword-audio");
+		let text_audio = "assets/sword"+player.sword.num+".mp3";
+		if (player.sword.num == 4){
+			player.sword.num = 1
+		} else {
+			player.sword.num ++
+		}
+		audio.src=text_audio;
+		audio.play();
+
+		this.sword.isRotating = true;
+		const targetRotation = Math.PI * 2;
+		const rotationSpeed = 0.5;
+
+		const rotateSword = () => {
+			if (this.sword.rotation < targetRotation) {
+				this.sword.rotation += rotationSpeed;
+			} else {
+				for (const enemy of enemies) {
+					enemy.got = false;
+				}
+				this.sword.isRotating = false;
+				this.sword.rotation = 0;
+				app.ticker.remove(rotateSword);
+			}
+		};
+
+		app.ticker.add(rotateSword);
+
 	}
 
 	shot(player) {}

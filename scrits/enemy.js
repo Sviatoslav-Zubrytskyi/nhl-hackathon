@@ -13,6 +13,7 @@ class Enemy {
 		this.sprite.y = y
 		this.lookangle = 0
 		this.hit = false;
+		this.got = false;
 		worldContainer.addChild(this.sprite)
 		this.health = 100;
 		this.speed = speed;
@@ -22,6 +23,10 @@ class Enemy {
 
 	follow_player(player, delta) {
 		if(this.health > 0) {
+			if(isColliding(this.sprite, player.sword) && player.sword.isRotating && !this.got){
+				this.health -= 30;
+				this.got = true;
+			}
 			let coltrig = false
 			for (const boundary of boundariesList) {
 				if (isColliding(this.sprite, boundary)) {
@@ -70,15 +75,18 @@ class Enemy {
 	}
 
 	die(){
+		this.health = 0;
 		var background = document.getElementById("myaudio");
 		background.pause();
 		var audio = document.getElementById("death-audio");
 		let text_audio = "assets/death"+(Math.floor(Math.random() * 2) + 1)+".mp3";
 		audio.src=text_audio;
 		audio.play();
-		setTimeout(() => {
+		if(countAudio != 0) {
+			setTimeout(() => {
 				background.play();
-		},2000);
+			},2000);
+		}
 		this.alive = false;
 		this.sprite.texture = dead
 		player.points++
@@ -88,7 +96,6 @@ class Enemy {
 
 	hit_player(player){
 		player.health -= this.damage;
-		this.health -= 20;
 		this.hit = true;
 	}
 
