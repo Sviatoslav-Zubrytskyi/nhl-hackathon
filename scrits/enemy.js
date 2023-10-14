@@ -95,7 +95,10 @@ class Enemy {
 
 enemies.push(new Enemy(200, 100, 1, 5))
 enemies.push(new Enemy(200, 200, 2, 3))
-enemies.push(new Enemy(200, 200, 1.5, 4))
+enemies.push(new Enemy(200, 200, 1.9, 4))
+enemies.push(new Enemy(200, 200, 1.4, 4))
+enemies.push(new Enemy(200, 200, 1.3, 4))
+enemies.push(new Enemy(200, 200, 1.7, 4))
 //create_enemy(app.screen.width / 3 + 100, app.screen.height / 3 + 100)
 
 app.ticker.add(delta => {
