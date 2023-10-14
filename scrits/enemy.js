@@ -70,6 +70,10 @@ class Enemy {
 	}
 
 	die(){
+		var audio = document.getElementById("death-audio");
+		let text_audio = "assets/death"+(Math.floor(Math.random() * 2) + 1)+".mp3";
+		audio.src=text_audio;
+		audio.play();
 		this.alive = false;
 		this.sprite.texture = dead
 	}
