@@ -75,15 +75,15 @@ class Player {
 			}
 			if (this.keys[69]) {
 				// E key
-				this.attack(0.5)
+				this.attack()
 			}
 		})
 	}
 
-	attack(speed) {
+	attack() {
 		let isRotating = false
 		let targetRotation = 0
-		let rotationSpeed = 0.05
+		let rotationSpeed = 0.25
 
 		if (!isRotating) {
 			targetRotation = Math.PI * 2 // 360 degrees in radians
@@ -95,6 +95,7 @@ class Player {
 						this.sword.rotation += rotationSpeed
 					} else {
 						isRotating = false
+						this.sword.rotation = 0
 						app.ticker.remove(this.sword)
 					}
 				}
