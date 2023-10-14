@@ -1,10 +1,11 @@
 class LevelGenerator {
-	constructor(app, spriteTextures, levelData, boundariesList) {
+	constructor(app, spriteTextures, levelData, boundariesList, enemySpawnsList) {
 		this.app = app
 		this.spriteTextures = spriteTextures
 		this.levelData = levelData
 		this.container = new PIXI.Container()
 		this.boundariesList = boundariesList
+		this.enemySpawnsList = enemySpawnsList
 	}
 
 	generateLevel() {
@@ -19,6 +20,8 @@ class LevelGenerator {
 
 					if (BOUNDARIES_TYPE.includes(spriteType))
 						this.boundariesList.push(sprite)
+
+					if (spriteType === 'enemySpawn') this.enemySpawnsList.push(sprite)
 				}
 			}
 		}
