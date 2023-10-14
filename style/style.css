@@ -11,12 +11,20 @@ body {
 h1 {
 	border:solid;
 }
+/*
 #found {
 	background-color: white;
 	position: absolute;
 	top: 50px; 
 	left: 1500px;
 }
+*/
 progress {
-	background-color: red
+	background-color: red;
+	appearance: none;
+	background-color: white;
+	position: absolute;
+	top: 130px; 
+	left: 1500px;
+	height: 20px;
 }

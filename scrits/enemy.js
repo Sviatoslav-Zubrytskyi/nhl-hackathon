@@ -73,7 +73,7 @@ enemies.push(new Enemy(200, 200, 1.5, 4))
 //create_enemy(app.screen.width / 3 + 100, app.screen.height / 3 + 100)
 
 app.ticker.add(delta => {
-	document.getElementById('found').innerHTML = "Health: " + player.health;
+	//document.getElementById('found').innerHTML = "Health: " + player.health;
 
 	let healthBarValue = document.getElementById("health");
 	healthBarValue.value = player.health;
