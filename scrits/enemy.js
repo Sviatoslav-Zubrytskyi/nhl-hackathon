@@ -1,7 +1,9 @@
 let enemies= [];
 //playerx = 100;
 //playery = 100;
-function create_enemy(x, y) {
+
+lookangle = 0;
+    function create_enemy(x, y) {
     const enemy = PIXI.Sprite.from('assets/enemy.png');
     enemy.anchor.set(0.5);
     enemy.x = x;
@@ -23,28 +25,41 @@ function hasObstacleBetween(startX, startY, endX, endY) {
 }
 
 function follow_player(enemy, player, speed, delta){
-    let dx = player.x - enemies[0].x;
-    let dy = player.y - enemies[0].y;
-    let angle = Math.atan2(dy, dx);
-    let angleDifference = Math.abs((Math.abs(enemies[0].rotation) - Math.abs(angle)))*180/Math.PI;
-
-    const distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-
-    if ((angleDifference%360 <= 60) && (distance <= 150)) {
-        document.getElementById("found").innerHTML = "I CAN SEE YOU!!! - " + angleDifference+ "<br>DIST:" + distance;
-        enemies[0].rotation = angle;
-        const vx = Math.cos(angle) * speed;
-        const vy = Math.sin(angle) * speed;
-        if (distance > 0) {
-            enemy.x += vx;
-            enemy.y += vy;
+    let coltrig = false;
+    for (const boundary of boundariesList) {
+        if (isColliding(enemy, boundary)) {
+            enemy.x = enemy.previousX;
+            enemy.y = enemy .previousY;
+            coltrig = true;
         }
-    } else if (distance <= 150) {
-        enemies[0].rotation += 0.1 * delta;
-        document.getElementById("found").innerHTML = "I CAN'T SEE YOU!"+ angleDifference+"<br>"+enemies[0].rotation*180/Math.PI+"<br>"+angle*180/Math.PI;
-    } else {
-        document.getElementById("found").innerHTML = "I CAN'T SEE YOU!"+ angleDifference+"<br>"+enemies[0].rotation*180/Math.PI+"<br>"+angle*180/Math.PI;
     }
+    if(!coltrig){
+        enemy.previousX = enemy.x;
+        enemy.previousY = enemy.y;
+        let dx = player.x - enemies[0].x;
+        let dy = player.y - enemies[0].y;
+        let angle = Math.atan2(dy, dx);
+        let angleDifference = Math.abs((Math.abs(lookangle) - Math.abs(angle)))*180/Math.PI;
+
+        const distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+
+        if ((angleDifference%360 <= 60) && (distance <= 150)) {
+            document.getElementById("found").innerHTML = "I CAN SEE YOU!!! - " + angleDifference+ "<br>DIST:" + distance;
+            lookangle = angle;
+            const vx = Math.cos(angle) * speed;
+            const vy = Math.sin(angle) * speed;
+            if (distance > 0) {
+                enemy.x += vx;
+                enemy.y += vy;
+            }
+        } else if (distance <= 150) {
+            lookangle += 0.1 * delta;
+            document.getElementById("found").innerHTML = "I CAN'T SEE YOU!"+ angleDifference+"<br>"+enemies[0].rotation*180/Math.PI+"<br>"+angle*180/Math.PI;
+        } else {
+            document.getElementById("found").innerHTML = "I CAN'T SEE YOU!"+ angleDifference+"<br>"+enemies[0].rotation*180/Math.PI+"<br>"+angle*180/Math.PI;
+        }
+    }
+    
 }
 
 
