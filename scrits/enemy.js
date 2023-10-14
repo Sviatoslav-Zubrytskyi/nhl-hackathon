@@ -42,31 +42,23 @@ class Enemy {
 				this.lookangle = angle
 				const vx = Math.cos(angle) * speed
 				const vy = Math.sin(angle) * speed
-				if (distance > 0) {
-					this.sprite.x += vx
-					this.sprite.y += vy
-				}
-			} else if (distance <= 150 && distance >= 10) {
+				this.sprite.x += vx
+				this.sprite.y += vy
+			} else if (distance <= 150 && distance >= 20) {
 				this.lookangle += 0.1 * delta
-				document.getElementById('found').innerHTML =
-					"I CAN'T SEE YOU!" +
-					angleDifference +
-					'<br>' +
-					(this.lookangle * 180) / Math.PI +
-					'<br>' +
-					(angle * 180) / Math.PI
 			} else {
-				document.getElementById('found').innerHTML =
-					"I CAN'T SEE YOU!" +
-					angleDifference +
-					'<br>' +
-					(enemies[0].rotation * 180) / Math.PI +
-					'<br>' +
-					(angle * 180) / Math.PI
+				this.hit_player(player)
+				const vx = Math.cos(angle) * speed
+				const vy = Math.sin(angle) * speed
+				this.sprite.x -= vx
+				this.sprite.y -= vy
 			}
 		}
 	}
-
+	hit_player(player){
+		player.health -= 1;
+		document.getElementById('found').innerHTML = player.health;
+	}
 
 
 }
