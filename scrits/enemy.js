@@ -63,14 +63,7 @@ class Enemy {
 	hit_player(player){
 		player.health -= this.damage;
 		this.hit = true;
-<<<<<<< HEAD
 	}
-=======
->>>>>>> 94435fe679e0d50ca0977c48b17f9e54001de443
-
-
-	}
-	// method kill
 
 }
 
