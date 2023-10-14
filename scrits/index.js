@@ -11,6 +11,8 @@ const TILE_SET_DICT = {
 	0: 'void',
 	1: 'wall',
 	2: 'floor',
+	3: 'enemySpawn',
+	4: 'playerSpawn',
 }
 
 const BOUNDARIES_TYPE = ['wall', 'void']
