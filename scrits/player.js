@@ -5,8 +5,11 @@ class Player {
 		this.boundariesList = boundariesList
 		this.health = 100
 		this.player = PIXI.Sprite.from('assets/char_walk_left.gif')
+
 		this.player.x = 160
 		this.player.y = 160
+
+		this.sword = PIXI.Sprite.from('assets/sword.png')
 
 		this.camera = { x: 0, y: 0 }
 		this.keys = {}
@@ -14,6 +17,9 @@ class Player {
 
 	init() {
 		this.worldContainer.addChild(this.player)
+		this.player.addChild(this.sword)
+
+		// this.sword.pivot.set(this.sword.width / 2, this.sword.height)
 
 		window.addEventListener('keydown', event => {
 			this.keys[event.keyCode] = true
@@ -22,9 +28,14 @@ class Player {
 			this.keys[event.keyCode] = false
 		})
 
+		document.addEventListener('click', () => this.shot(this.player))
+
 		this.app.ticker.add(() => {
 			this.camera.x = this.player.x
 			this.camera.y = this.player.y
+
+			this.sword.position.set(0, 28)
+			this.sword.pivot.set(0, 28)
 
 			this.worldContainer.x =
 				this.app.renderer.screen.width / (2 * SCALE) - this.camera.x
@@ -58,8 +69,38 @@ class Player {
 				// Down arrow key
 				this.player.y += PLAYER_SPEED
 			}
+			if (this.keys[69]) {
+				// E key
+				this.attack(0.5)
+			}
 		})
 	}
+
+	attack(speed) {
+		let isRotating = false
+		let targetRotation = 0
+		let rotationSpeed = 0.05
+
+		if (!isRotating) {
+			targetRotation = Math.PI * 2 // 360 degrees in radians
+			isRotating = true
+
+			app.ticker.add(() => {
+				if (isRotating) {
+					if (this.sword.rotation < targetRotation) {
+						this.sword.rotation += rotationSpeed
+					} else {
+						isRotating = false
+						app.ticker.remove(this.sword)
+					}
+				}
+			})
+		}
+	}
+
+	shot(player) {}
+
+	die() {}
 }
 
 const isColliding = (player, boundary) => {
